@@ -20,7 +20,7 @@ contract Ownable {
 
 contract Election is Ownable {
 
-    struct Election {
+    struct Elections {
         uint _id;
         uint _year;
         uint _categoryId;
@@ -58,7 +58,7 @@ contract Election is Ownable {
         uint _electionId;
     }
 
-    mapping(uint => Election) public elections;
+    mapping(uint => Elections) public elections;
 
     mapping(uint => Category) public categories;
 
@@ -87,7 +87,7 @@ contract Election is Ownable {
 
     function createElection(uint _year, string memory _type) public onlyOwner {
 
-        elections[numElections] = Election(numElections, _year, numCategory);
+        elections[numElections] = Elections(numElections, _year, numCategory);
         categories[numCategory] = Category(numCategory, _type);
 
         numElections ++;
