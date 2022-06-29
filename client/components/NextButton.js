@@ -1,16 +1,28 @@
-import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import {
+  Animated,
+  Button,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { useTailwind } from "tailwind-rn";
 
 const NextButton = () => {
-  const size = 128;
-  const strokeWidth = 2;
-  const center = size / 2;
-  const radius = size / 2 - strokeWidth / 2;
-
+  const tailwind = useTailwind();
   return (
     <View style={styles.container}>
-      {/* Buttons */}
-      <Text>Next Button</Text>
+      <TouchableOpacity
+        style={[
+          tailwind("w-64 p-3 rounded-full my-5 self-center"),
+          { backgroundColor: "#027314" },
+        ]}
+      >
+        <Text style={tailwind("text-center text-white text-xl")}>
+          Enter App
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
