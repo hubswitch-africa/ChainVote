@@ -9,11 +9,12 @@ import {
 } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
-const NextButton = () => {
+const NextButton = ({ scrollTo }) => {
   const tailwind = useTailwind();
   return (
     <View style={styles.container}>
       <TouchableOpacity
+        onPress={() => scrollTo()}
         style={[
           tailwind("w-64 p-3 rounded-full my-5 self-center"),
           { backgroundColor: "#027314" },
