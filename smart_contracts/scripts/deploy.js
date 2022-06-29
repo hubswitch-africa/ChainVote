@@ -4,8 +4,8 @@ const fs = require("fs");
 
 async function main() {
   // We get the contract to deploy
-  const Voting = await hre.ethers.getContractFactory("Voting");
-  const voting = await Voting.deploy("Voting contract");
+  const Voting = await hre.ethers.getContractFactory("Election");
+  const voting = await Voting.deploy("Election contract");
 
   await voting.deployed();
 
