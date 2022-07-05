@@ -73,11 +73,26 @@ contract Election is Ownable {
     mapping(address => bool) public voted;
 
 
+    event ElectionCreated(uint _id, uint _year, uint _categoryId);
+
+    event CategoryCreated(uint _id, string _name);
+
+    event CandidateAdded(uint _id, string _name, string _bio, uint _partyId, uint _electionId, bool _doesExist);
+
+    event PartyCreated(uint _id, string _party, string _partySlug);
+
+    event Voters(uint _id, address, _address);
+
+    event Votes(uint _id, uint _voterId, uint _candidateId, uint _electionId);
+
     event Voted(uint _candidateId);
+
 
     uint candidateIndex;
 
     uint numVoters;
+
+    uint numVotes;
 
     uint numParties;
 
@@ -85,10 +100,14 @@ contract Election is Ownable {
 
     uint numCategory;
 
+
     function createElection(uint _year, string memory _type) public onlyOwner {
 
         elections[numElections] = Elections(numElections, _year, numCategory);
         categories[numCategory] = Category(numCategory, _type);
+
+        emit ElectionCreated(numElections, _year, numCategory),
+        emit CategoryCreated(numCategory, _type); 
 
         numElections ++;
         numCategory ++;
@@ -105,6 +124,9 @@ contract Election is Ownable {
 
         party[numParties] = Party(numParties, _party, _partySlug);
 
+        emit CandidateAdded(candidateIndex, _name, _bio, numParties, _electionId, true);
+        emit PartyCreated(numParties, _party, _partySlug);
+
         candidateIndex ++;
         numParties ++;
     }
@@ -119,12 +141,17 @@ contract Election is Ownable {
         voters[numVoters]._id = numVoters;
         voters[numVoters]._address = msg.sender;
 
-        votes[numVoters]._voterId = numVoters;
-        votes[numVoters]._candidateId = _candidateId;
-        votes[numVoters]._electionId = candidates[_candidateId]._electionId;
+        votes[numVotes]._id = numVotes;
+        votes[numVotes]._voterId = numVoters;
+        votes[numVotes]._candidateId = _candidateId;
+        votes[numVotes]._electionId = candidates[_candidateId]._electionId;
+
+        emit Voted(_candidateId);
+        emit Voters(numVoters, msg.sender);
+        emit Votes(numVotes, numVoters, _candidateId, candidates[_candidateId]._electionId);
 
         numVoters++;
-        emit Voted(_candidateId);
+        numVotes++;
     }
 
     function totalVotes(uint _candidateId) public view returns(uint) {
