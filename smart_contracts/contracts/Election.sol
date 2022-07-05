@@ -58,19 +58,19 @@ contract Election is Ownable {
         uint _electionId;
     }
 
-    mapping(uint => Elections) public elections;
+    mapping(uint => Elections) private elections;
 
-    mapping(uint => Category) public categories;
+    mapping(uint => Category) private categories;
 
-    mapping(uint => Candidate) public candidates;
+    mapping(uint => Candidate) private candidates;
 
-    mapping(uint => Party) public party;
+    mapping(uint => Party) private party;
 
-    mapping(uint => Voters) public voters;
+    mapping(uint => Voters) private voters;
 
-    mapping(uint => Votes) public votes;
+    mapping(uint => Votes) private votes;
 
-    mapping(address => bool) public voted;
+    mapping(address => bool) private voted;
 
 
     event ElectionCreated(uint _id, uint _year, uint _categoryId);
@@ -81,9 +81,9 @@ contract Election is Ownable {
 
     event PartyCreated(uint _id, string _party, string _partySlug);
 
-    event Voters(uint _id, address, _address);
+    event VotersAdded(uint _id, address _address);
 
-    event Votes(uint _id, uint _voterId, uint _candidateId, uint _electionId);
+    event VotesAdded(uint _id, uint _voterId, uint _candidateId, uint _electionId);
 
     event Voted(uint _candidateId);
 
