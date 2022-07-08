@@ -4,12 +4,12 @@ const fs = require("fs");
 
 async function main() {
   // We get the contract to deploy
-  const Voting = await hre.ethers.getContractFactory("Election");
-  const voting = await Voting.deploy("Election contract");
+  const Election = await hre.ethers.getContractFactory("Election");
+  const election = await Election.deploy("Election contract");
 
-  await voting.deployed();
+  await election.deployed();
 
-  console.log("Voting contract deployed to:", voting.address);
+  console.log("Voting contract deployed to:", election.address);
 
   fs.writeFileSync('./config.js', `
   export const contractAddress = "${blog.address}"
