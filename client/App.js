@@ -6,6 +6,8 @@ import { TailwindProvider } from "tailwind-rn";
 import utilities from "./tailwind.json";
 import { useEffect, useState } from "react";
 import LoginScreen from "./screens/LoginScreen";
+import MainContainer from "./Navigation/MainContainer";
+import { NavigationContainer } from "@react-navigation/native";
 
 const Loading = () => {
   return (
@@ -37,17 +39,11 @@ export default function App() {
     checkOnboarding();
   }, []);
   return (
-    <TailwindProvider utilities={utilities}>
-      <View style={styles.container}>
-        {loading ? (
-          <Loading />
-        ) : viewedOnboarding ? (
-          <LoginScreen />
-        ) : (
-          <Onboarding />
-        )}
-      </View>
-    </TailwindProvider>
+    <NavigationContainer>
+      <TailwindProvider utilities={utilities}>
+        <MainContainer user />
+      </TailwindProvider>
+    </NavigationContainer>
   );
 }
 
